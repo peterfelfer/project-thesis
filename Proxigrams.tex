@@ -1,0 +1,28 @@
+\section{Proximity Histogram and Surface excess of solute }
+\label{proxigrams and seos}
+
+
+The surface excess of solute \cite{Gib61} is an important thermodynamic property of interfaces like grain boundaries and precipitation/bulk boundaries. It takes the adsorption of atoms on the boundary into account, which leads to a higher concentration of a component on the boundary than in the bulk. By comparing the amounts of substance of the real behavior to an ideal reference system the amount of substance on the interface can be determined. Out of this by dividing \emph{n} by the area of the interface the areal surface excess concentration can be calculated \cite{Mit08}.\\
+
+The problem with this calculation is that in reality interfaces are rarely smooth and thus the determination of the area becomes complicated.\\
+
+Helman et al. \cite{Hel02a} proposed a method to calculate the surface excess without the need to mathematically determine the area of the interface.
+The Proximity histogram (a so called proxigram) describes the  concentration of an atom species in relation to the distance of a isoconcentration surface.  Their method bases on the analysis of proximity shells around the isosurface. The analysis is based on counting the atoms inside this specified range. With the number of atoms and the known material density the local concentration inside the shell can be calculated (see \cref{fig:pg1}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{proximity_range}
+	\caption{Schematic proximity shell with center $l_0$ and range $\delta l/2$. The number of atoms $N_l$ within the range here is 5. The total atom number is 11. \label{fig:pg1}}
+\end{figure}
+
+Repeating this for subsequent proximity ranges results in a function of concentration over the distance to the isosurface (proximity). An example is shown in \cref{fig:pg2}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{proxigram}
+	\caption{Exemplary Proxigram. \label{fig:pg2}}
+	\source{\cite{Hel02a}}
+\end{figure}
+
+A positive distance value describes a position inside the isosurface. Proxigrams are able to reveal the actual position of the isosurface to the interface by comparing the zero point (position of the isosurface) with the concentration peaks (position of an atom species).
+

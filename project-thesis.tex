@@ -1,0 +1,86 @@
+\documentclass{i7-thesis}
+% options:
+% [germanthesis] - Thesis is written in German
+% [plainunnumbered] - Don't print numbers on plain pages
+% [earlydraft] - Settings for quick draft printouts
+% [watermark] - Print current time/date at bottom of each page
+% [phdthesis] - switch to PhD thesis style
+% [twoside] - double sided
+
+%%%%% Personal modifications %%%
+
+\graphicspath{{./figures/}}
+
+% introduces a new command that 
+% inserts the figure source under the picture
+
+\newcommand{\source}[1]{\vspace{-2pt} \caption*{ Source: {#1}} }
+
+%%%%%% author etc. %%%%%%%%%%%%
+\include{Submission_Info}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% title/contents %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{roman}
+
+\maketitle
+
+%\include{Abstract}
+%\include{Kurzfassung}
+\acresetall
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Thesis %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% introduction
+
+\include{Introduction}
+
+% main
+
+\include{Motivation}
+
+\include{Concept}
+
+\chapter{Methods}
+
+\input{Voxelization}
+
+\input{Contribution_Transfer_Function}
+
+\input{Isosurface_Extraction}
+
+\input{Voronoi_Tesselation}
+
+\input{Proxigrams}
+
+%%% conclusion 
+\include{Conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% appendix %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\include{glossarytitlename}
+\clearpage
+
+\chapter{References}
+\listoffigures
+\clearpage
+%\listoftables
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{references/references}
+
+
+\end{document}

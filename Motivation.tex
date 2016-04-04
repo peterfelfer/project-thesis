@@ -1,0 +1,18 @@
+\chapter{Motivation}
+\label{motivation}
+
+The data measured in an Atom Probe Tomography experiment has to be visually and quantitatively interpreted.
+For this reason the collected data has to be visualized in such a manner that 
+the final visualization represents the actual specimen information in the best way.
+Since the surface has to be calculated from the data gathered from the experiment the result is highly depending on the  methods used for the calculation. Especially on the nanoscale, where ATP-measurements take place, even small deviations in the reconstruction may lead to a different understanding of the experiment.\\
+
+Therefore the algorithms have to be chosen properly in order to minimize these deviations and the reconstruction artifacts.\\
+
+The usage of common algorithms for both the extraction and the processing of the surface-mesh results in an isosurface with a sufficient precision. Nevertheless the potential to increase the precision by using more modern algorithms exists.
+The interpretation of ATP-data requires algorithms that provide an exact representation of detail.
+For example one of the most common algorithms to perform the isosurface extraction is the \ac{MC} algorithm \cite{Lor87}. But is has the major drawback that the actually existing sharp features are smoothed out and thus falsifies the actual shape.\\
+
+The goal of this thesis is to overcome the existing drawbacks. Thus the visualization pipeline of the \ac{APT}-analysis has to be improved in order to optimize the quality of the reconstruction. In particular the mesh of the generated isosurface.
+Quality here means to achieve the most accurate representation of the actual specimen information.
+
+The proceeding is to create a visualization pipeline from scratch containing some selected algorithms and methods, which are performed consecutively. The goal is to write an \ac{APT} data reconstruction tool using the open source 3D-Program \emph{Blender} and \emph{Python} as programming language.

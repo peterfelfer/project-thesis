@@ -1,0 +1,62 @@
+\section{Voronoi Tesselation}
+\label{cvt}
+
+The Voronoi Tesselation describes  the segementation of a plane into regions (Voronoi cells) with the property that every cell describes the shortest euclidean distance to its generator (a point in the plane) \cite{Du99}. This feature is mathematically expressed in \cref{eq:voronoi}.
+
+\begin{equation}
+\label{eq:voronoi}
+\widehat{V_i} = \big\{ x \in  \Omega \; | \; | x-g_i |  < |x-g_j| \; for \; j = 1,\dots,k, \; j \neq i \big\} 
+\end{equation}
+
+In \cref{fig:vor} an exemplary Voronoi Tesselation is shown with 20 generators and the corresponding centroids of the Voronoi cells.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{my_voronoi_20}
+	\caption{Exemplary Voronoi tesselation with 20 generators and the gaussian normal distribution as density function. \label{fig:vor}}
+\end{figure}
+
+The dual graph of the Voronoi Tesselation is the Delaunay Triangulation since the Voronoi generators are equal to the triangle vertices of the Delaunay tesselation and vice versa (see \cref{fig:vor_del}).
+The core principle of graph duality has already been discussed in \cref{isosurface extraction}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{voronoi_delaunay}
+	\caption{Dual relationship between the Voronoi and the Delaunay tesselation. \label{fig:vor_del}}
+	\source{\cite{Swe04}}
+\end{figure}
+
+\subsection{Centroidal Voronoi Tesselation}
+
+A special case of the Voronoi Tesselation is the \ac{CVT}. In this case all generators g coincide with the position of the mass centroid $ g^*$ of each cell corresponding to a given density function. The calculation of the mass centroid is expressed in \cref{eq:mass_centroid} \cite{Du99}.
+
+\begin{equation} 
+\label{eq:mass_centroid}
+g^* = {{\int_V y \cdot \rho (y) \; \mathrm{d} y} \over {\int_V \cdot \rho (y) \; \mathrm{d} y}}
+\end{equation}
+
+The \ac{CVT} has the advantage over the conventional Voronoi that its is more equally distributed and structured (see \cref{fig:cvt2} and \cref{fig:cvt}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{cvt2}
+	\caption{Comparison between a 10 generator Voronoi diagram and its centroidal analogue with the density function $ \rho(y) = const. $. \label{fig:cvt2}}
+	\source{\cite{Du99}}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{cvt}
+	\caption{Comparison between a 64 generator Voronoi diagram and its centroidal analogue with the density function $ e^{-2x-2y} $. \label{fig:cvt}}
+	\source{\cite{Du99}}
+\end{figure}
+
+ This is an important feature assuming the Voronoi Tesselation to be a mesh that represents a certain geometry. In such cases the equal distribution property can be very useful as it optimizes the mesh quality for further mesh processing techniques such as visualization \cite{All05}. Furthermore the mesh optimization becomes much more robust against initial mesh configuration and the distribution of the vertices. Comparable optimization techniques like the Laplacian Smoothing are more sensitive to these conditions \cite{Wan05}.\\
+ 
+A common algorithm used to obtain a \ac{CVT} from a Voronoi Tesselation is the Lloyd's relaxation by \cite{Llo82}.
+The basic working principle is to iteratively repeat the following two steps until a sufficient approximation to the \ac{CVT} is reached:
+
+\begin{enumerate}
+\item Build the Voronoi Tesselation corresponding to the mesh vertices
+\item Computation of the centroids according to the given density function (cf. \cref{eq:mass_centroid}) and replace the site of each cell with the calculated centroid of the cell
+\end{enumerate}   

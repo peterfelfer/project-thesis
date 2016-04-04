@@ -1,0 +1,46 @@
+\section{Voxelization}
+\label{voxelization}
+
+The data resulting of APT-measurements consists of three-dimensional coordinates, belonging to the experimentally detected ions from the specimen \cite{Hel02}. Discretization of the arbitrary three-dimensional data simplifies its processing and calculation a lot.
+So the data is divided into uniform, three-dimensional cells, typically cubes \cite{Geb06}, forming a regular grid. The cells with a certain unit volume are centered at the grid points \cite{Wan94}. These cells are called voxels (volume elements, cf. pixels in two dimensions) and are typically not stored by coordinates, but in a tree structure. Every voxel stores a value of a parameter describing the cells it represents \cite[p. 127]{Joh04}.\\
+A schematic representation of voxels  is shown in \cref{fig:voxel_repr}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{voxel_representation}
+	\caption{Representation of voxels: a, single voxel b, voxel set c, voxel grid. \label{fig:voxel_repr}}
+	\source{http://johnrichie.com/V2/richie/isosurface/volume.html}
+\end{figure}
+
+\subsection{Dreamworks OpenVDB library}
+\label{dreamworks}
+Regarding the great size of APT-data an efficient method for the discretization step is required.
+With the open source library OpenVDB written by K.Museth \cite{Mus13}, Dreamworks provides a convenient solution for solving this problem.
+The key features of the library are:
+\begin{itemize}
+\item B+-tree based hierarchical data structure
+\item memory efficient
+\item no topology restrictions
+\item efficiency is on average(O(1))
+\item especially suitable for sparse volumes
+\end{itemize}
+
+For the storage of voxels in OpenVDB at compile time a fixed maximum tree height is chosen. The root node of the tree has a dynamic number of children at each node (branching factor). The internal nodes have fixed branching factors and the leaf nodes is limited to a fixed number of dimensions. In comparison to octrees and N-trees with fixed branching factors (2 and N) the branching factors of the OpenVDB structure can change within the tree levels. Their limitation is to take values that are powers of two.
+Only values that are stored in the leaf nodes correspond to individual voxels. These are the smallest addressable units \cite{OpenVDB}.     
+
+\subsection{Adaptive treatment of sparse volumes}
+\label{sparse volumes}
+
+Voxelization means creating a uniform, regular grid covering the whole volume. In many applications the volume is \emph{sparse}, i.e. there are only few feature containing voxels while a huge amount of surrounding voxels is emptpy.
+Due to the great memory issues big data sets waste for the processing of featureless voxels the use of adaptive methods is a proper solution.
+Adaptive here means a more efficient representation of big data sets  by using voxel sizes that convey the actual features \cite{OpenVDB}. The difference between a conventional and an adaptive rasterization (in three dimesions this is equal to voxelization) of a sparse volume is shown in \cref{fig:conv_vs_adapt}.
+
+\begin{figure}[H]%
+	\centering
+	\subfloat[conventional]{\label{fig:conv}\includegraphics[width=0.4\textwidth]{2d_rasterization}}%
+	\subfloat[adaptive]{\label{fig:adapt}\includegraphics[width=0.4\textwidth]{2d_rasterization_adaptive}}
+	\caption{Conventional and adaptive rasterization of a circle in sparse volume.\label{fig:conv_vs_adapt}}%
+	\source{http://media.bestofmicro.com/5/T/224417/original/raycasting-voxels}
+\end{figure}
+
+As the APT-data to be visualized is a highly sparse volume, the voxelization with the OpenVDB library is perfectly valid. 

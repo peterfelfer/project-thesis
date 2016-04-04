@@ -1,0 +1,40 @@
+\section{Contribution Transfer Function}
+\label{contribution transfer function}
+
+The main problem with discretizing arbitrary volume data is that the measured ion positions do not match with the regular grid fitted in. This circumstance has to be taken into account by applying a transfer function. That means a weighted \emph{'splatting'} of each atom to multiple surrounding grid points.
+The transfer functions as proposed by O.Hellman and D.Seidman \cite{Hel02a} adress this problem.\\
+The atom fractions contributing to each grid point are calculated with either a square or a sawtooth function. The problem of this proceeding is that every atom has to be either delocalized or displaced or both in order to be fitted on the grid.\\
+
+The working principle of both the square and the sawtooth function are described in the following section.
+
+\subsection{Square Transfer Function}
+
+The square function assigns each atom to its closest grid point with full weight.
+The exact way how the contribution works is shown in \cref{fig:squarefunction}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{squarefct}
+	\caption{Square Transfer Function \label{fig:squarefunction}}
+	\source{\cite{Hel02a}}
+\end{figure}
+
+An advantage of this method is of course the simplicity, but its disadvantages predominate. There is a spatial displacement from the atom to the grid point. Of course this causes a deviation from the original spatial configuration. In order to minimize this displacement error the grid would have to be infinitesimally small. But this causes an unreasonable calculation effort.
+
+\subsection{Sawtooth Transfer Function}
+
+A second option to spread each atoms density to the grid is the sawtooth function.
+The sawtooth function linearly distributes the contribution of an atom to its neighboring grid points. This contribution follows the lever principle, i.e. $ the \: contribution \propto length \: of \: the \: opposite \: line \: segment $ (see figure \ref{fig:sawtoothfunction}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{sawtoothfct}
+	\caption{Sawtooth Transfer Function \label{fig:sawtoothfunction}}
+	\source{\cite{Hel02a}}
+\end{figure}
+
+The advantage is clearly that the original data becomes  not spatially displaced.
+But every atom is splitted i.e. delocalized as there is no exact initial matching between the atom and any point of the grid.\\
+
+But the delocalization of the atoms is not only a disadvantage. The increasing volume each atom contributes to after spreading improves the statistical representation.\\
+
